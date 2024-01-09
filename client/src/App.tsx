@@ -15,21 +15,55 @@ function App() {
     setData(data);
   };
 
-  const updateData = async () => {
-    await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify({ data }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
+  // const updateData = async () => {
+  //   await fetch(API_URL, {
+  //     method: "POST",
+  //     body: JSON.stringify({ data }),
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
 
-    await getData();
+  //   await getData();
+  // };
+
+  // const verifyData = async () => {
+  //   throw new Error("Not implemented");
+  // };
+
+  const updateData = async () => {
+    try {
+      await fetch(`${API_URL}/update`, {
+        method: "POST",
+        body: JSON.stringify({ data }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      await getData();
+    } catch (error) {
+      console.error("Error updating data:", error);
+    }
   };
 
   const verifyData = async () => {
-    throw new Error("Not implemented");
+    try {
+      const response = await fetch(`${API_URL}/verify`, {
+        method: "POST",
+        body: JSON.stringify({ data }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const { isValid } = await response.json();
+      alert(isValid ? "Data is valid" : "Data has been tampered with!");
+    } catch (error) {
+      console.error("Error verifying data:", error);
+    }
   };
 
   return (
