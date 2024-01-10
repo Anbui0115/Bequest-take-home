@@ -15,22 +15,7 @@ function App() {
     setData(data);
   };
 
-  // const updateData = async () => {
-  //   await fetch(API_URL, {
-  //     method: "POST",
-  //     body: JSON.stringify({ data }),
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
 
-  //   await getData();
-  // };
-
-  // const verifyData = async () => {
-  //   throw new Error("Not implemented");
-  // };
 
   const updateData = async () => {
     try {
